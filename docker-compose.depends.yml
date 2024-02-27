@@ -1,0 +1,11 @@
+version: '3'
+services:
+  pub-01:
+    depends_on:
+      - rabbitmq-topics
+      - sub-01
+      - sub-03
+  
+  sub-01:
+    depends_on:
+      - rabbitmq-topics      

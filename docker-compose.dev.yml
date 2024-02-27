@@ -1,0 +1,45 @@
+version: '3'
+services:
+  rabbitmq-topics:
+    image: rabbitmq:management
+    hostname: ${RABBITMQ_HOST}
+    container_name: rabbitmq-topics
+    restart: always
+    ports:
+      - '15673:15672'
+      - '${RABBITMQ_PORT}:5672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - TZ=${TIMEZONE}
+  
+  pub-01:
+    build:
+      context: ./pub-01
+      dockerfile: Dockerfile
+      target: development
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./pub-01:/app
+
+  sub-01:
+    build:
+      context: ./sub-01
+      dockerfile: Dockerfile
+      target: development
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./sub-01:/app
+
+  sub-03:
+    build:
+      context: ./sub-03
+      dockerfile: Dockerfile
+      target: development
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./sub-03:/app
+

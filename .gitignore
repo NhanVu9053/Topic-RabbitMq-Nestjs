@@ -1,0 +1,11 @@
+**/dist/
+**/log/
+**/logs/
+**/node_modules/
+**/.env
+**/.env.*
+**/.DS_STORE
+**/**/firebase*.config.json
+**/src/assets/
+**/.idea
+**/*.secret.yaml

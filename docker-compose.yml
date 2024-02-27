@@ -1,0 +1,48 @@
+version: '3'
+services:
+  pub-01:
+    build:
+      context: ./pub-01
+      dockerfile: Dockerfile
+      target: development
+      args:
+        NODE_ENV: ${ENV}
+    container_name: pub-01
+    ports:
+      - '${PUB_PORT}:3000'
+    environment:
+      - NODE_ENV=${ENV}
+      - TZ=${TIMEZONE}
+      - SERVICE_NAME=pub-01
+      - RABBITMQ_URLS=${RABBITMQ_URLS}
+      - TOPIC_QUEUE=${TOPIC_QUEUE}
+
+  sub-01:
+    build:
+      context: ./sub-01
+      dockerfile: Dockerfile
+      target: development
+      args:
+        NODE_ENV: ${ENV}
+    container_name: sub-01
+    environment:
+      - NODE_ENV=${ENV}
+      - TZ=${TIMEZONE}
+      - SERVICE_NAME=sub-01
+      - RABBITMQ_URLS=${RABBITMQ_URLS}
+      - TOPIC_QUEUE=${TOPIC_QUEUE}
+
+  sub-03:
+    build:
+      context: ./sub-03
+      dockerfile: Dockerfile
+      target: development
+      args:
+        NODE_ENV: ${ENV}
+    container_name: sub-03
+    environment:
+      - NODE_ENV=${ENV}
+      - TZ=${TIMEZONE}
+      - SERVICE_NAME=sub-03
+      - RABBITMQ_URLS=${RABBITMQ_URLS}
+      - TOPIC_QUEUE=${TOPIC_QUEUE}
